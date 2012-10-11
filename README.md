@@ -33,9 +33,9 @@ Example role for a master:
 
     override_attributes({
       :ucarp => { 
-      :password => "sekret",
-      :vip => "192.168.122.10",
-      :netmask => "255.255.255.0",
-      :master => true
+        :password => "sekret",
+        :vip => "192.168.122.10",
+        :netmask => "255.255.255.0",
+        :master => true
       }
     })
