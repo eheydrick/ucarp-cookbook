@@ -25,17 +25,17 @@ with node attributes.
 
 Example role for a master:
 
-name "ucarp_master"
-description "Role for ucarp master"
-run_list([
-  "recipe[ucarp]"
-])
+    name "ucarp_master"
+    description "Role for ucarp master"
+    run_list([
+      "recipe[ucarp]"
+    ])
 
-override_attributes({
-  :ucarp => { 
-    :password => "sekret",
-    :vip => "192.168.122.10",
-    :netmask => "255.255.255.0",
-    :master => true,
-  }
-})
+    override_attributes({
+      :ucarp => { 
+      :password => "sekret",
+      :vip => "192.168.122.10",
+      :netmask => "255.255.255.0",
+      :master => true
+      }
+    })
