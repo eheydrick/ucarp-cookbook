@@ -1,0 +1,24 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+iface eth0 inet static
+  address <%= node['ipaddress'] %>
+  netmask <%= node['network']['interfaces'][node['network']['default_interface']]['addresses'][node['ipaddress']]['netmask'] %>
+  gateway <%= node['network']['default_gateway'] %>
+  ucarp-vid <%= @vid %>
+  ucarp-vip <%= @vip %>
+  ucarp-password <%= @password %>
+  ucarp-advskew <%= @advskew %>
+  ucarp-advbase <%= @advbase %>
+  ucarp-master <%= @master %>
+
+iface eth0:ucarp inet static
+  address <%= @vip %>
+  netmask <%= @netmask %>
+
