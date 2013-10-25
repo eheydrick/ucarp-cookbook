@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of ucarp.
 
+## 0.0.2:
+
+* Interface is now an attribute
+
 ## 0.0.1:
 
 * Initial release of ucarp

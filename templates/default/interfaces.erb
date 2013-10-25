@@ -6,8 +6,8 @@ auto lo
 iface lo inet loopback
 
 # The primary network interface
-auto eth0
-iface eth0 inet static
+auto <%= @interface %>
+iface <%= @interface %> inet static
   address <%= node['ipaddress'] %>
   netmask <%= node['network']['interfaces'][node['network']['default_interface']]['addresses'][node['ipaddress']]['netmask'] %>
   gateway <%= node['network']['default_gateway'] %>

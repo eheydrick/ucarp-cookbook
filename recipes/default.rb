@@ -31,7 +31,8 @@ template "/etc/network/interfaces" do
     :password => node['ucarp']['password'],
     :advskew => node['ucarp']['master'] ? node['ucarp']['advskew'] : node['ucarp']['advskew'] + 99,
     :advbase => node['ucarp']['advbase'],
-    :master => node['ucarp']['master'] ? 'yes' : 'no'
+    :master => node['ucarp']['master'] ? 'yes' : 'no',
+    :interface => node['ucarp']['interface']
   )
   notifies :restart, "service[networking]", :immediately
 end
