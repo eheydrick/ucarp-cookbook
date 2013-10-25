@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of ucarp.
 
+## 0.0.4:
+
+* Add support for bonded interfaces
+
 ## 0.0.2:
 
 * Interface is now an attribute
