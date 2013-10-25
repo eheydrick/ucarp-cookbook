@@ -32,7 +32,9 @@ template "/etc/network/interfaces" do
     :advskew => node['ucarp']['master'] ? node['ucarp']['advskew'] : node['ucarp']['advskew'] + 99,
     :advbase => node['ucarp']['advbase'],
     :master => node['ucarp']['master'] ? 'yes' : 'no',
-    :interface => node['ucarp']['interface']
+    :interface => node['ucarp']['interface'],
+    :bonded_interfaces => node['ucarp']['bonded_interfaces'],
+    :bond_mode => node['ucarp']['bond_mode']
   )
   notifies :restart, "service[networking]", :immediately
 end

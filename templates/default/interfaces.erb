@@ -5,6 +5,15 @@
 auto lo
 iface lo inet loopback
 
+<% if @interface.match(/bond/) -%>
+<% @bonded_interfaces.each do |bonded_interface| -%>
+auto <%= bonded_interface %>
+iface <%= bonded_interface %> inet manual
+  bond-master <%= @interface %>
+
+<% end -%>
+<% end -%>
+
 # The primary network interface
 auto <%= @interface %>
 iface <%= @interface %> inet static
@@ -17,8 +26,13 @@ iface <%= @interface %> inet static
   ucarp-advskew <%= @advskew %>
   ucarp-advbase <%= @advbase %>
   ucarp-master <%= @master %>
+<% if @interface.match(/bond/) -%>
+  bond-slaves none
+  bond_mode <%= @bond_mode %>
+  bond_miimon 100
+<% end -%>
 
-iface eth0:ucarp inet static
+iface <%= @interface %>:ucarp inet static
   address <%= @vip %>
   netmask <%= @netmask %>
 
