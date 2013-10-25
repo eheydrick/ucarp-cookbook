@@ -1,3 +1,4 @@
+name             "ucarp"
 maintainer       "Eric Heydrick"
 maintainer_email "eheydrick@gmail.com"
 license          "Apache 2.0"
