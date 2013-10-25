@@ -16,6 +16,11 @@ Attributes
 * advskew - advertisement skew in seconds, defaults to 1 for master
 * advbase - advertisement interval in seconds, defaults to 1
 * master - true if this node is the master
+* vip - the virtual IP
+* netmask - the netmask of the virtual IP
+* interface - the interface ucarp manages, defaults to eth0
+* bonded_interfaces - the interfaces to bond when bonding is enabled, defaults to eth0, eth1
+* bond_mode - the bonding mode when bonding is used
 
 Usage
 =====
