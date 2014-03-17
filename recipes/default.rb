@@ -37,9 +37,24 @@ template "/etc/network/interfaces" do
     :bond_mode => node['ucarp']['bond_mode']
   )
   notifies :restart, "service[networking]", :immediately
+
+  if node['ucarp']['interface'].match(/bond/)
+    node['ucarp']['bonded_interfaces'].each do |interface|
+      if node['network']['interfaces'].include?(interface)
+        notifies :run, "execute[flush ip on #{interface}]", :immediately
+      end
+    end
+  end
 end
 
 service "networking" do
   supports :restart => true
   action :nothing
+end
+
+node['ucarp']['bonded_interfaces'].each do |interface|
+execute "flush ip on #{interface}" do
+  command "ip addr flush dev #{interface}"
+    action :nothing
+  end
 end

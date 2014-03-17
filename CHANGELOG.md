@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of ucarp.
 
+## 0.0.5:
+
+* Flush the IP address off the enslaved interfaces when setting up bonding
+
 ## 0.0.4:
 
 * Add support for bonded interfaces
