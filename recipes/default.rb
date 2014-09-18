@@ -53,8 +53,8 @@ service "networking" do
 end
 
 node['ucarp']['bonded_interfaces'].each do |interface|
-execute "flush ip on #{interface}" do
-  command "ip addr flush dev #{interface}"
+  execute "flush ip on #{interface}" do
+    command "ip addr flush dev #{interface}"
     action :nothing
   end
 end
