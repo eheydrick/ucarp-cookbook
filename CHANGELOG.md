@@ -5,6 +5,7 @@ This file is used to list changes made in each version of ucarp.
 ## 0.0.6:
 
 * Add supported OSs
+* Add support for mode 1 failover bonded interfaces
 
 ## 0.0.5:
 
