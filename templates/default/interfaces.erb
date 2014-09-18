@@ -12,6 +12,9 @@ iface lo inet loopback
 auto <%= bonded_interface %>
 iface <%= bonded_interface %> inet manual
   bond-master <%= @interface %>
+<% if @bond_mode == 1 && bonded_interface == @bonded_interfaces.first -%>
+  bond-primary <%= @bonded_interfaces.first %>
+<% end -%>
 
 <% end -%>
 <% end -%>
