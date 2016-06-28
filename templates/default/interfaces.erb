@@ -20,9 +20,29 @@ iface <%= bonded_interface %> inet manual
 <% end -%>
 
 # The primary network interface
+<% if @interface != 'eth0' -%>
+auto eth0
+iface eth0 inet dhcp
+
+# The secondary interface
 auto <%= @interface %>
 iface <%= @interface %> inet static
-  address <%= node['ipaddress'] %>
+  address <%= node['network']['interfaces'][@interface]['addresses'].keys[1] %>
+  # The ucarp interface
+  ucarp-vid <%= @vid %>
+  ucarp-vip <%= @vip %>
+  ucarp-password <%= @password %>
+  ucarp-advskew <%= @advskew %>
+  ucarp-advbase <%= @advbase %>
+  ucarp-master <%= @master %>
+
+iface <%= @interface %>:ucarp inet static
+  address <%= @vip %>
+  netmask <%= @netmask %>
+<% else -%>
+auto <%= @interface %>
+iface <%= @interface %> inet static
+  address <%= node['ipaddress']
   netmask <%= node['network']['interfaces'][node['network']['default_interface']]['addresses'][node['ipaddress']]['netmask'] %>
   gateway <%= node['network']['default_gateway'] %>
   ucarp-vid <%= @vid %>
@@ -40,4 +60,4 @@ iface <%= @interface %> inet static
 iface <%= @interface %>:ucarp inet static
   address <%= @vip %>
   netmask <%= @netmask %>
-
+<% end -%>

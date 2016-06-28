@@ -36,7 +36,7 @@ template '/etc/network/interfaces' do
     bonded_interfaces: node['ucarp']['bonded_interfaces'],
     bond_mode: node['ucarp']['bond_mode']
   )
-  notifies :restart, 'service[networking]', :immediately
+  notifies :run, 'bash[restart networking]', :immediately
 
   if node['ucarp']['interface'].match(/bond/)
     node['ucarp']['bonded_interfaces'].each do |interface|
@@ -47,9 +47,14 @@ template '/etc/network/interfaces' do
   end
 end
 
-service 'networking' do
-  supports restart: true
-  action :nothing
+bash 'restart networking' do
+	code <<-EOH
+	ifdown #{node['ucarp']['interface']}
+	ifdown ucarp:#{node['ucarp']['interface']}
+	ifup #{node['ucarp']['interface']}
+	ifup ucarp:#{node['ucarp']['interface']}
+	EOH
+	action :nothing
 end
 
 node['ucarp']['bonded_interfaces'].each do |interface|
