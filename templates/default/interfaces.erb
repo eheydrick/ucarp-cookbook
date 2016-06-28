@@ -24,6 +24,9 @@ iface <%= bonded_interface %> inet manual
 auto eth0
 iface eth0 inet dhcp
 
+# The secondary interface
+auto <%= @interface %>
+iface <%= @interface %> inet static
 # The ucarp interface
 ucarp-vid <%= @vid %>
 ucarp-vip <%= @vip %>
@@ -32,7 +35,6 @@ ucarp-advskew <%= @advskew %>
 ucarp-advbase <%= @advbase %>
 ucarp-master <%= @master %>
 
-# The secondary interface
 iface <%= @interface %>:ucarp inet static
   address <%= @vip %>
   netmask <%= @netmask %>
